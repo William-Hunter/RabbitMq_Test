@@ -1,23 +1,26 @@
+package worker;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import util.ConfigProperties;
 
-import java.io.BufferedReader;
-import java.io.Reader;
 import java.util.Scanner;
 
 /**
  * Created by william on 2018/6/25.
  */
 public class NewTask {
-
-    private final static String QUEUE_NAME = "deal";
+    private final static String HOST = ConfigProperties.getConfigByName("host");
+    private final static String QUEUE_NAME = "multipleWork";
+    private final static String USERNAME = "william";
+    private final static String PASSWORD = "lone";
 
     public static void main(String[] argv)throws java.io.IOException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.3.254");
-        factory.setUsername("william");
-        factory.setPassword("lone");
+        factory.setHost(HOST);
+        factory.setUsername(USERNAME);
+        factory.setPassword(PASSWORD);
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
@@ -35,14 +38,15 @@ public class NewTask {
     }
 
     private static String getMessage(String[] strings){
-        if (strings.length < 1)
+        if (strings.length < 1){
             return "Hello World!";
+        }
         return joinStrings(strings, " ");
     }
 
     private static String joinStrings(String[] strings, String delimiter) {
         int length = strings.length;
-        if (length == 0) return "";
+        if (length == 0) {return "";}
         StringBuilder words = new StringBuilder(strings[0]);
         for (int i = 1; i < length; i++) {
             words.append(delimiter).append(strings[i]);

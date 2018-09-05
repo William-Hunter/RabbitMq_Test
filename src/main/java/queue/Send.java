@@ -1,10 +1,11 @@
-/**
+package queue; /**
  * Created by william on 2018/6/22.
  */
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
+import util.ConfigProperties;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,10 +14,9 @@ import java.util.Date;
 public class Send {
 
     private final static String QUEUE_NAME = "hello";
-    private final static String HOST = "www.tongchuangkeji.net";
+    private final static String HOST = ConfigProperties.getConfigByName("host");
     private final static String USERNAME = "candy";
     private final static String PASSWORD = "candy";
-
 
     public static void main(String[] argv)throws java.io.IOException {
         ConnectionFactory factory = new ConnectionFactory();
@@ -36,10 +36,6 @@ public class Send {
         channel.close();
         connection.close();
     }
-
-
-
-
 
 
 }
