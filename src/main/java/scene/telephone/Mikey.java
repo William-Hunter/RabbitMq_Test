@@ -1,7 +1,7 @@
 package scene.telephone;
 
 import util.ConfigProperties;
-import worker.SelfTalker;
+import queue.SelfTalker;
 
 import java.io.IOException;
 
